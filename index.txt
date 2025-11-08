@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold Converter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            font-size: 16px;
+            color: #fff;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        .msg {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #222;
+            padding: 10px 20px;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bold Converter</h1>
+        <textarea id="input" placeholder="Digite aqui..."></textarea>
+        <textarea id="output" readonly></textarea>
+        <button onclick="copy()">Copiar</button>
+        <button onclick="clear()">Limpar</button>
+    </div>
+    <div class="msg" id="msg">Copiado!</div>
+
+    <script>
+        const map = {
+            'A':'𝗔','B':'𝗕','C':'𝗖','D':'𝗗','E':'𝗘','F':'𝗙','G':'𝗚','H':'𝗛','I':'𝗜','J':'𝗝',
+            'K':'𝗞','L':'𝗟','M':'𝗠','N':'𝗡','O':'𝗢','P':'𝗣','Q':'𝗤','R':'𝗥','S':'𝗦','T':'𝗧',
+            'U':'𝗨','V':'𝗩','W':'𝗪','X':'𝗫','Y':'𝗬','Z':'𝗭','a':'𝗮','b':'𝗯','c':'𝗰','d':'𝗱',
+            'e':'𝗲','f':'𝗳','g':'𝗴','h':'𝗵','i':'𝗶','j':'𝗷','k':'𝗸','l':'𝗹','m':'𝗺','n':'𝗻',
+            'o':'𝗼','p':'𝗽','q':'𝗾','r':'𝗿','s':'𝘀','t':'𝘁','u':'𝘂','v':'𝘃','w':'𝘄','x':'𝘅',
+            'y':'𝘆','z':'𝘇','0':'𝟬','1':'𝟭','2':'𝟮','3':'𝟯','4':'𝟰','5':'𝟱','6':'𝟲','7':'𝟳',
+            '8':'𝟴','9':'𝟵'
+        };
+
+        document.getElementById('input').addEventListener('input', e => {
+            document.getElementById('output').value = e.target.value.split('').map(c => map[c] || c).join('');
+        });
+
+        function copy() {
+            const out = document.getElementById('output');
+            if(out.value) {
+                out.select();
+                document.execCommand('copy');
+                const msg = document.getElementById('msg');
+                msg.style.display = 'block';
+                setTimeout(() => msg.style.display = 'none', 1500);
+            }
+        }
+
+        function clear() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+        }
+    </script>
+</body>
+</html>
